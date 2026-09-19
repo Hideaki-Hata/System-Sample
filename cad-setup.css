@@ -57,3 +57,58 @@
 @media(max-width:720px){
   .cad-page-context{padding:9px 12px}.cad-title-row{align-items:flex-start}.record-state{display:none}.cad-main{width:calc(100% - 16px);padding-top:8px}.form-grid{grid-template-columns:1fr}.field.wide{grid-column:auto}.doc-row{grid-template-columns:48px minmax(0,1fr) auto}.main-doc{grid-column:2/4}.preview{display:none}.route-item{grid-template-columns:28px 46px 1fr 74px}.route-note{display:none}.route-actions{grid-column:3/5}.sticky-actions{grid-template-columns:1fr 1fr}.validation{grid-column:1/-1}.btn-cancel{display:none}.btn-register{min-width:0}.palette-head,.preview-head{align-items:flex-start;flex-direction:column}.time-rule-box{grid-template-columns:1fr}.time-rule-icon{display:none}
 }
+
+/* ===== iPad / タブレット横向き最適化 ===== */
+@media (min-width: 1000px) and (max-width: 1366px) {
+  .cad-page-context { padding: 8px 16px 10px; }
+  .breadcrumb-row, .crumb-link { font-size: 15px; }
+  .title-line h1 { font-size: 19px; }
+  .cad-title-row p, .cad-badge,
+  .record-state, .record-state strong { font-size: 15px; }
+
+  .cad-main { width: calc(100% - 24px); padding: 11px 0 24px; gap: 11px; grid-template-columns: minmax(330px,.78fr) minmax(560px,1.42fr); }
+  .cad-column { gap: 10px; }
+  .card-head { gap: 10px; padding: 10px 12px; }
+  .step-no { width: 30px; height: 30px; font-size: 15px; }
+  .card-head h2 { font-size: 17px; }
+  .card-head p, .required-note, .doc-count, .route-count,
+  .doc-count b, .route-count b { font-size: 15px; }
+  .card-body, .route-body { padding: 10px 12px; }
+
+  .form-grid { gap: 8px 9px; }
+  .field, .field input, .field select, .field textarea, .custom-step-row input { font-size: 15px; }
+  .field input, .field select, .field textarea, .custom-step-row input { padding: 7px 8px; }
+  .upload-drop { padding: 9px 10px; margin-bottom: 9px; }
+  .upload-icon { width: 36px; height: 36px; font-size: 15px; }
+  .upload-drop strong, .upload-drop small { font-size: 15px; }
+  .doc-row { grid-template-columns: 58px minmax(0,1fr) auto auto 26px; gap: 7px; padding: 7px 0; }
+  .doc-kind { font-size: 12px; }
+  .doc-info strong, .doc-info span, .main-doc, .mini-btn, .icon-btn { font-size: 15px; }
+  .icon-btn { width: 30px; height: 30px; }
+
+  .process-palette { padding: 9px; margin-bottom: 9px; }
+  .palette-head { margin-bottom: 6px; }
+  .palette-head strong, .palette-head span,
+  .palette-buttons button, .custom-step-row button,
+  .route-builder-head strong, .route-builder-head span, .reset-route,
+  .route-index, .major-label, .route-item strong, .route-note,
+  .route-actions button, .preview-head strong, .preview-head span,
+  .preview-step, .preview-arrow,
+  .time-rule-icon, .time-rule-box strong, .time-rule-box p { font-size: 15px; }
+  .palette-buttons button { padding: 5px 8px; }
+  .route-builder-head { padding: 7px 8px; }
+  .route-item { grid-template-columns: 28px 48px minmax(140px,1fr) 76px 88px; gap: 6px; min-height: 38px; padding: 5px 7px; }
+  .route-actions button { width: 24px; height: 24px; }
+  .route-actions .remove-step { width: 27px; height: 27px; font-size: 15px; }
+  .route-preview-box { margin-top: 9px; padding: 8px; }
+  .preview-step { padding: 6px 8px; }
+  .time-rule-box { margin-top: 9px; padding: 8px 9px; grid-template-columns: 32px 1fr; gap: 8px; }
+  .time-rule-icon { width: 30px; height: 30px; }
+  .time-rule-box p { line-height: 1.4; }
+
+  .sticky-actions { gap: 6px; padding-top: 8px; }
+  .validation, .btn-cancel, .btn-draft, .btn-register { font-size: 15px; }
+  .btn-cancel, .btn-draft, .btn-register { height: 36px; padding: 0 11px; }
+  .btn-register { min-width: 150px; }
+  .cad-toast { font-size: 15px; }
+}

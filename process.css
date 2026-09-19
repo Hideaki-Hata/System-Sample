@@ -116,3 +116,43 @@
 @media(max-width:640px){
   .page-context{padding:9px 12px}.case-meta-sub{gap:12px}.process-main{padding:8px}.doc-name{display:none}.drawing-canvas-wrap{padding:8px}.pen-legend{display:none}.field-grid{grid-template-columns:1fr}.timer-row{grid-template-columns:1fr 1fr}.timer-row strong{grid-column:1/-1;text-align:left}
 }
+
+/* ===== iPad / タブレット横向き最適化 ===== */
+@media (min-width: 1000px) and (max-width: 1366px) {
+  .page-context { padding: 8px 16px 9px; }
+  .breadcrumb-row, .crumb-link { font-size: 15px; }
+  .case-meta-main h1 { font-size: 17px; }
+  .case-qty, .case-no, .stage-badge,
+  .meta-item span, .meta-item strong { font-size: 15px; }
+  .case-meta-sub { gap: 14px; }
+
+  .process-main { padding: 10px 14px 12px; grid-template-columns: minmax(0,1fr) 300px; gap: 10px; }
+  .drawing-toolbar { min-height: 42px; gap: 8px 10px; padding: 5px 7px; }
+  .doc-page, .doc-name, .zoom-value { font-size: 15px; }
+  .tool-btn, .pen-btn { height: 38px; min-width: 38px; font-size: 15px; }
+  .tool-btn.square, .pen-btn { min-width: 38px; padding: 0 7px; }
+  .drawing-canvas-wrap { padding: 10px; }
+  .drawing-footer { padding: 6px 8px; gap: 8px; }
+  .pen-legend { gap: 8px; font-size: 14px; }
+  .drawing-thumbnails { gap: 4px; }
+  .thumb { width: 118px; min-width: 118px; padding: 4px 6px; font-size: 15px; gap: 4px; }
+  .thumb span { font-size: 14px; }
+
+  .side-panel-inner { gap: 7px; }
+  .side-section summary { padding: 9px 10px; font-size: 16px; }
+  .side-section summary::after { font-size: 17px; }
+  .side-section-body { padding: 8px 10px 10px; }
+  .field-row, .field-grid label,
+  .side-section input, .side-section select, .side-section textarea,
+  .check-row, .side-hint, .timer-btn, .timer-row strong,
+  .calculated-row, .calculated-row strong,
+  .btn-machine { font-size: 15px; }
+  .field-row, .field-grid label { margin-bottom: 7px; }
+  .side-section input, .side-section select, .side-section textarea { padding: 6px 7px; }
+  .check-row { margin-bottom: 7px; }
+  .side-hint { line-height: 1.4; }
+  .timer-btn { height: 38px; }
+  .side-actions { grid-template-columns: 84px 1fr; gap: 7px; padding-top: 7px; }
+  .btn-draft, .btn-complete { height: 40px; font-size: 15px; }
+  .process-toast { font-size: 15px; }
+}

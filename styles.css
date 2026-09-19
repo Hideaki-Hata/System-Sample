@@ -339,3 +339,107 @@ main { padding-bottom: 80px; }
   .time-summary-grid { grid-template-columns:1fr 1fr; }
   .stage-btn { min-width:88px; }
 }
+
+/* ===== iPad / タブレット横向き最適化（PC表示は維持） ===== */
+@media (min-width: 1000px) and (max-width: 1366px) {
+  body { font-size: 16px; }
+
+  .topbar {
+    min-height: 58px;
+    gap: 8px;
+    padding: 0 8px;
+    flex-wrap: nowrap;
+  }
+  .topbar-left { gap: 8px; flex-wrap: nowrap; width: auto; }
+  .brand { gap: 8px; padding: 0 2px; }
+  .brand-mark { width: 34px; height: 34px; border-radius: 8px; font-size: 16px; }
+  .brand-name { font-size: 17px; }
+  .brand-sub { font-size: 14px; margin-top: 0; }
+  .global-nav { gap: 4px; padding: 7px 0; width: auto; border-top: 0; }
+  .nav-btn { min-height: 40px; padding: 0 13px; font-size: 16px; border-radius: 7px; }
+  .user-area { gap: 7px; padding-right: 2px; font-size: 15px; margin-left: 0; }
+  .date { font-size: 16px; margin-right: 2px; }
+  .avatar { width: 28px; height: 28px; font-size: 15px; }
+  .status-dot { width: 6px; height: 6px; }
+
+  .section-wrap { width: calc(100% - 24px); }
+  .dashboard-grid { grid-template-columns: 1.05fr .95fr; gap: 12px; padding-top: 18px; }
+  .panel { padding: 16px 16px 14px; }
+  .panel-head { padding-bottom: 8px; margin-bottom: 12px; }
+  .panel-head h2 { font-size: 19px; }
+  .panel-head p { font-size: 15px; margin-left: 6px; }
+  .panel-kicker { font-size: 15px; }
+
+  .metric-grid { gap: 8px; margin-bottom: 16px; }
+  .metric-card { min-height: 96px; padding: 11px 10px 10px; }
+  .metric-label { font-size: 15px; min-height: 30px; line-height: 1.35; }
+  .metric-card strong { font-size: 25px; margin: 4px 0 6px; }
+  .metric-card small, .metric-note { font-size: 15px; }
+
+  .chart-block + .chart-block { margin-top: 16px; }
+  .chart-title-row { margin-bottom: 7px; }
+  .chart-title-row h3 { font-size: 16px; }
+  .chart-title-row > span, .chart-title-row .legend { font-size: 15px; }
+  .bar-chart { height: 132px; gap: 6px; padding-top: 16px; }
+  .bar-chart.yearly { height: 102px; gap: 12px; }
+  .bar-col { grid-template-rows: 16px 1fr 20px; }
+  .bar-value, .bar-label, .dual-col > span { font-size: 15px; }
+  .dual-bar-chart { height: 108px; gap: 12px; }
+
+  .incident-block { margin-top: 14px; }
+  .incident-table { font-size: 15px; }
+  .incident-table th { padding: 6px 5px; }
+  .incident-table td { padding: 7px 5px; }
+  .incident-table th:first-child, .incident-table td:first-child { width: 70px; min-width: 70px; }
+  .incident-pill { font-size: 12px; min-width: 56px; padding: 4px 7px; }
+  .status-pill { padding: 3px 6px; }
+
+  .project-section { margin-top: 22px; }
+  .heading-line h2 { font-size: 20px; }
+  .small-note, .operation-help { font-size: 15px; }
+  .search-box { min-width: 230px; }
+  .search-box input { padding: 8px 32px 8px 10px; }
+  .filter-row { gap: 7px; padding: 10px 0 12px; }
+  .filter-btn { font-size: 15px; padding: 6px 12px; }
+  .project-list { gap: 9px; }
+  .project-card { padding: 13px 15px 12px; }
+  .project-top-row { gap: 12px; }
+  .project-title-wrap h3,
+  .project-title-wrap strong,
+  .project-title-wrap .qty,
+  .project-status,
+  .due-label,
+  .due-wrap strong,
+  .due-badge,
+  .quality-toggle,
+  .stage-major,
+  .stage-btn,
+  .comment-empty,
+  .comment-row,
+  .comment-text,
+  .quality-entry label,
+  .quality-entry textarea,
+  .entry-actions select,
+  .add-comment-btn { font-size: 15px; }
+  .quality-toggle { min-width: 88px; padding: 7px 9px; }
+  .project-body-grid { grid-template-columns: minmax(0,1fr) 220px; gap: 13px; margin-top: 12px; }
+  .stage-node { min-width: 70px; }
+  .stage-btn { min-height: 40px; min-width: 82px; padding: 8px 9px; }
+  .stage-btn small, .stage-btn.start-stage small { font-size: 13px; }
+  .stage-arrow { font-size: 22px; line-height: 34px; }
+  .quality-entry { padding-left: 12px; }
+
+  .time-summary-section { margin-top: 22px; }
+  .time-filter-wrap label { font-size: 15px; }
+  .time-filter-wrap select { min-width: 150px; padding: 7px 8px; }
+  .time-summary-grid { gap: 8px; margin: 10px 0; }
+  .time-summary-card { padding: 10px 12px; }
+  .time-summary-card span, .time-summary-card small { font-size: 15px; }
+  .time-summary-card strong { font-size: 23px; }
+  .time-log-table { font-size: 15px; min-width: 680px; }
+  .time-log-table th { padding: 7px 8px; }
+  .time-log-table td { padding: 8px; }
+  .time-log-table td:first-child strong,
+  .time-log-table td:first-child span,
+  .running-pill { font-size: 15px; }
+}
