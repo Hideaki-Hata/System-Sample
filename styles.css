@@ -443,3 +443,23 @@ main { padding-bottom: 80px; }
   .time-log-table td:first-child span,
   .running-pill { font-size: 15px; }
 }
+
+/* ===== iPad横向き：指定箇所を1行表示 ===== */
+@media (min-width: 1000px) and (max-width: 1366px) {
+  /* 稼働状況：納期遅延カードだけ少し横幅を広げ、文言を1行にする */
+  .metric-grid-4 {
+    grid-template-columns: 1fr 1fr 1fr 1.18fr;
+  }
+  .metric-grid-4 .metric-card:nth-child(4) .metric-label,
+  .metric-grid-4 .metric-card:nth-child(4) .metric-note {
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+  }
+  .metric-grid-4 .metric-card:nth-child(4) .metric-label {
+    font-size: 12px;
+    min-height: 24px;
+  }
+  .metric-grid-4 .metric-card:nth-child(4) .metric-note {
+    font-size: 12px;
+  }
+}
