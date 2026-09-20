@@ -512,3 +512,26 @@ main { padding-bottom: 80px; }
     white-space: nowrap !important;
   }
 }
+
+
+/* ===== iPad横向き：稼働状況KPI文言を1行・同サイズで統一 ===== */
+@media (min-width: 900px) and (max-width: 1600px) {
+  #operation-panel .metric-grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  #operation-panel .metric-card .metric-label,
+  #operation-panel .late-card .metric-label,
+  #operation-panel .late-card .metric-note {
+    font-size: 15px !important;
+    line-height: 1.35 !important;
+    letter-spacing: normal !important;
+  }
+
+  #operation-panel .metric-card:first-child .metric-label,
+  #operation-panel .late-card .metric-label,
+  #operation-panel .late-card .metric-note {
+    white-space: nowrap !important;
+  }
+}
