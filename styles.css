@@ -463,3 +463,29 @@ main { padding-bottom: 80px; }
     font-size: 12px;
   }
 }
+
+
+/* ===== 納期遅延カード：iPad横向きでも必ず1行表示 ===== */
+#operation-panel .late-card .metric-label,
+#operation-panel .late-card .metric-note {
+  white-space: nowrap !important;
+}
+
+@media (min-width: 900px) and (max-width: 1600px) {
+  #operation-panel .metric-grid-4 {
+    grid-template-columns: 1fr 1fr 1fr 1.28fr !important;
+  }
+
+  #operation-panel .late-card .metric-label {
+    font-size: 15px !important;
+    min-height: 20px !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.04em;
+  }
+
+  #operation-panel .late-card .metric-note {
+    font-size: 15px !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.04em;
+  }
+}
