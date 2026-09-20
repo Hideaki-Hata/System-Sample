@@ -489,3 +489,26 @@ main { padding-bottom: 80px; }
     letter-spacing: -0.04em;
   }
 }
+
+/* ===== 納期遅延カード：文字サイズを少し戻しつつ1行表示 ===== */
+@media (min-width: 900px) and (max-width: 1600px) {
+  #operation-panel .metric-grid-4 {
+    grid-template-columns: 0.96fr 1fr 1fr 1.42fr !important;
+    gap: 8px !important;
+  }
+
+  #operation-panel .late-card .metric-label {
+    font-size: 16px !important;
+    min-height: 20px !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.035em !important;
+    white-space: nowrap !important;
+  }
+
+  #operation-panel .late-card .metric-note {
+    font-size: 16px !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.035em !important;
+    white-space: nowrap !important;
+  }
+}
