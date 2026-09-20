@@ -67,11 +67,15 @@
 <button class="pen-btn active" data-tool="cursor" title="選択・移動" type="button">↖</button>
 <button class="pen-btn" data-tool="pen" title="ペン" type="button">✎</button>
 <button class="pen-btn" data-tool="marker" title="マーカー" type="button">▰</button>
-<button class="pen-btn" data-tool="eraser" title="消しゴム" type="button">⌫</button>
+<button aria-label="消しゴム" class="pen-btn" data-tool="eraser" title="消しゴム" type="button"><svg aria-hidden="true" class="eraser-icon" viewBox="0 0 24 24"><path d="M15.8 3.4 21 8.6a2 2 0 0 1 0 2.8l-7.8 7.8a2 2 0 0 1-1.4.6H7.2a2 2 0 0 1-1.4-.6l-2.8-2.8a2 2 0 0 1 0-2.8l10-10.2a2 2 0 0 1 2.8 0Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/><path d="m8.1 9 6.9 6.9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11.8 19.8h8.7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg></button>
 <span class="tool-sep"></span>
 <button class="color-btn red active" data-color="#c81e2b" title="赤：要確認・実測値" type="button"></button>
 <button class="color-btn blue" data-color="#1c5aa8" title="青：指示の補足" type="button"></button>
 <button class="color-btn black" data-color="#232120" title="黒：確認サイン" type="button"></button>
+<span class="tool-sep"></span>
+<button class="tool-btn annotation-action" id="undoAnnotation" title="直前の書込みを元に戻す" type="button">↶ 戻す</button>
+<button class="tool-btn annotation-action" id="clearAnnotation" title="このページの書込みをすべて消去" type="button">全消去</button>
+<span class="annotation-save-status" id="annotationSaveStatus">端末内に自動保存</span>
 </div>
 <div class="tool-group view-tools">
 <button aria-label="縮小" class="tool-btn square" id="zoomOut" type="button">−</button>
@@ -225,10 +229,17 @@
     const drawingCanvas = document.getElementById('drawingCanvas');
     const zoomLabel = document.getElementById('zoomLabel');
     const toast = document.getElementById('processToast');
+    const saveStatus = document.getElementById('annotationSaveStatus');
+
+    const ANNOTATION_STORAGE_KEY = 'laserFactoryDemoAnnotationsV1';
     let tool = 'cursor';
     let penColor = '#c81e2b';
     let drawing = false;
     let zoom = 1;
+    let activePointerId = null;
+    let currentStroke = null;
+    let currentPage = '2';
+    let pageStrokes = loadAllAnnotations();
 
     function notify(message){
       toast.textContent = message;
@@ -237,15 +248,76 @@
       notify.timer = setTimeout(() => toast.classList.remove('show'), 2200);
     }
 
+    function setSaveStatus(text, saved=true){
+      if(!saveStatus) return;
+      saveStatus.textContent = text;
+      saveStatus.classList.toggle('unsaved', !saved);
+      clearTimeout(setSaveStatus.timer);
+      if(saved){
+        setSaveStatus.timer = setTimeout(() => {
+          saveStatus.textContent = '端末内に自動保存';
+        }, 1500);
+      }
+    }
+
+    function loadAllAnnotations(){
+      try{
+        const raw = localStorage.getItem(ANNOTATION_STORAGE_KEY);
+        const parsed = raw ? JSON.parse(raw) : {};
+        return parsed && typeof parsed === 'object' ? parsed : {};
+      }catch(err){
+        console.warn('Annotation load failed', err);
+        return {};
+      }
+    }
+
+    function saveAllAnnotations(showNotice=false){
+      try{
+        localStorage.setItem(ANNOTATION_STORAGE_KEY, JSON.stringify(pageStrokes));
+        setSaveStatus('保存済み', true);
+        if(showNotice) notify('図面への書込みをこの端末に保存しました。');
+      }catch(err){
+        console.warn('Annotation save failed', err);
+        setSaveStatus('保存できませんでした', false);
+        if(showNotice) notify('端末内への保存に失敗しました。');
+      }
+    }
+
+    function strokesForPage(page=currentPage){
+      if(!Array.isArray(pageStrokes[page])) pageStrokes[page] = [];
+      return pageStrokes[page];
+    }
+
+    function renderAnnotations(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const strokes = strokesForPage();
+      for(const stroke of strokes) drawStroke(stroke);
+    }
+
+    function drawStroke(stroke){
+      const pts = stroke.points || [];
+      if(!pts.length) return;
+      ctx.save();
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.globalCompositeOperation = stroke.tool === 'eraser' ? 'destination-out' : 'source-over';
+      ctx.strokeStyle = stroke.color || '#c81e2b';
+      ctx.globalAlpha = stroke.tool === 'marker' ? 0.32 : 1;
+      ctx.lineWidth = stroke.width || (stroke.tool === 'marker' ? 20 : stroke.tool === 'eraser' ? 28 : 1.8);
+      ctx.beginPath();
+      ctx.moveTo(pts[0].x, pts[0].y);
+      if(pts.length === 1){
+        ctx.lineTo(pts[0].x + 0.01, pts[0].y + 0.01);
+      }else{
+        for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x, pts[i].y);
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
 
     document.querySelectorAll('.crumb-link[data-href]').forEach(btn => btn.addEventListener('click', () => { location.href = btn.dataset.href; }));
-    document.querySelectorAll('.nav-btn[data-href]').forEach(btn => btn.addEventListener('click', () => {
-      location.href = btn.dataset.href;
-    }));
-
-    document.querySelectorAll('[data-go]').forEach(btn => btn.addEventListener('click', () => {
-      location.href = `index.html#${btn.dataset.go}`;
-    }));
+    document.querySelectorAll('.nav-btn[data-href]').forEach(btn => btn.addEventListener('click', () => { location.href = btn.dataset.href; }));
+    document.querySelectorAll('[data-go]').forEach(btn => btn.addEventListener('click', () => { location.href = `index.html#${btn.dataset.go}`; }));
 
     function applyZoom(next){
       zoom = Math.max(.7, Math.min(1.6, next));
@@ -266,8 +338,11 @@
       document.querySelectorAll('.pen-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       tool = btn.dataset.tool;
-      canvas.style.cursor = tool === 'cursor' ? 'default' : 'crosshair';
+      canvas.classList.toggle('drawing-enabled', tool !== 'cursor');
+      canvas.style.cursor = tool === 'cursor' ? 'default' : tool === 'eraser' ? 'cell' : 'crosshair';
+      notify(tool === 'cursor' ? '図面の移動・閲覧モードです。' : tool === 'eraser' ? '消しゴムを選択しました。' : tool === 'marker' ? 'マーカーを選択しました。' : 'ペンを選択しました。');
     }));
+
     document.querySelectorAll('.color-btn').forEach(btn => btn.addEventListener('click', () => {
       document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -276,41 +351,101 @@
 
     function canvasPoint(e){
       const r = canvas.getBoundingClientRect();
-      return { x:(e.clientX-r.left)*(canvas.width/r.width), y:(e.clientY-r.top)*(canvas.height/r.height) };
+      return {
+        x:(e.clientX-r.left)*(canvas.width/r.width),
+        y:(e.clientY-r.top)*(canvas.height/r.height)
+      };
     }
-    canvas.addEventListener('pointerdown', e => {
-      if(tool === 'cursor') return;
-      drawing = true;
-      canvas.setPointerCapture(e.pointerId);
-      const p = canvasPoint(e);
-      ctx.beginPath();
-      ctx.moveTo(p.x,p.y);
-    });
-    canvas.addEventListener('pointermove', e => {
-      if(!drawing) return;
-      const p = canvasPoint(e);
-      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      if(tool === 'eraser'){
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.lineWidth = 24;
-      }else{
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.strokeStyle = tool === 'marker' ? `${penColor}66` : penColor;
-        ctx.lineWidth = tool === 'marker' ? 20 : 3;
+
+    function strokeWidthFor(e){
+      if(tool === 'eraser') return 30;
+      if(tool === 'marker') return 20;
+      // Apple Pencil等で筆圧が取得できる場合だけ、わずかに線幅へ反映
+      if(e.pointerType === 'pen' && e.pressure > 0){
+        return 1.2 + e.pressure * 1.4;
       }
-      ctx.lineTo(p.x,p.y); ctx.stroke();
+      return 1.8;
+    }
+
+    function beginStroke(e){
+      if(tool === 'cursor' || (e.pointerType === 'mouse' && e.button !== 0)) return;
+      e.preventDefault();
+      drawing = true;
+      activePointerId = e.pointerId;
+      try{ canvas.setPointerCapture(e.pointerId); }catch(_){ }
+      currentStroke = {
+        tool,
+        color: penColor,
+        width: strokeWidthFor(e),
+        points: [canvasPoint(e)]
+      };
+      setSaveStatus('書込み中…', false);
+      renderAnnotations();
+      drawStroke(currentStroke);
+    }
+
+    function continueStroke(e){
+      if(!drawing || e.pointerId !== activePointerId || !currentStroke) return;
+      e.preventDefault();
+      currentStroke.points.push(canvasPoint(e));
+      renderAnnotations();
+      drawStroke(currentStroke);
+    }
+
+    function finishStroke(e){
+      if(!drawing || (e && e.pointerId !== activePointerId)) return;
+      if(e) e.preventDefault();
+      drawing = false;
+      if(currentStroke && currentStroke.points.length){
+        strokesForPage().push(currentStroke);
+        currentStroke = null;
+        saveAllAnnotations(false);
+      }
+      activePointerId = null;
+      renderAnnotations();
+    }
+
+    canvas.addEventListener('pointerdown', beginStroke, {passive:false});
+    canvas.addEventListener('pointermove', continueStroke, {passive:false});
+    canvas.addEventListener('pointerup', finishStroke, {passive:false});
+    canvas.addEventListener('pointercancel', finishStroke, {passive:false});
+    canvas.addEventListener('contextmenu', e => { if(tool !== 'cursor') e.preventDefault(); });
+
+    document.getElementById('undoAnnotation').addEventListener('click', () => {
+      const strokes = strokesForPage();
+      if(!strokes.length){
+        notify('このページに戻せる書込みはありません。');
+        return;
+      }
+      strokes.pop();
+      renderAnnotations();
+      saveAllAnnotations(false);
+      notify('直前の書込みを元に戻しました。');
     });
-    ['pointerup','pointercancel','pointerleave'].forEach(type => canvas.addEventListener(type, () => {
-      drawing = false; ctx.closePath();
-    }));
+
+    document.getElementById('clearAnnotation').addEventListener('click', () => {
+      const strokes = strokesForPage();
+      if(!strokes.length){
+        notify('このページに書込みはありません。');
+        return;
+      }
+      if(!confirm(`P.${currentPage} の手書き内容をすべて消去しますか？`)) return;
+      pageStrokes[currentPage] = [];
+      renderAnnotations();
+      saveAllAnnotations(false);
+      notify(`P.${currentPage} の書込みを消去しました。`);
+    });
 
     const pageButtons = [...document.querySelectorAll('.thumb')];
     function selectPage(btn){
+      if(drawing) finishStroke({pointerId: activePointerId, preventDefault() {}});
       pageButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.getElementById('pageNow').textContent = btn.dataset.page;
+      currentPage = btn.dataset.page;
+      document.getElementById('pageNow').textContent = currentPage;
       document.getElementById('docName').textContent = btn.dataset.name;
-      notify(btn.dataset.page === '1' ? '加工指示書を表示しました。' : btn.dataset.page === '4' ? '原価情報 P.4 を表示しました。' : `図面 P.${btn.dataset.page} を表示しました。`);
+      renderAnnotations();
+      notify(currentPage === '1' ? '加工指示書を表示しました。' : currentPage === '4' ? '原価情報 P.4 を表示しました。' : `図面 P.${currentPage} を表示しました。`);
     }
     pageButtons.forEach(btn => btn.addEventListener('click', () => selectPage(btn)));
     document.getElementById('prevPage').addEventListener('click', () => {
@@ -323,10 +458,22 @@
     });
 
     document.getElementById('machineSend').addEventListener('click', () => notify('加工機へ入力情報を送信しました。'));
-    document.getElementById('draftSave').addEventListener('click', () => notify('図面追記と入力内容を下書き保存しました。'));
-    document.getElementById('completeWork').addEventListener('click', () => notify('図面追記・チェック・申し送り内容を保存しました。工程の終了は案件一覧から行います。'));
+    document.getElementById('draftSave').addEventListener('click', () => {
+      saveAllAnnotations(true);
+    });
+    document.getElementById('completeWork').addEventListener('click', () => {
+      saveAllAnnotations(false);
+      notify('図面追記・チェック・申し送り内容を保存しました。工程の終了は作業入力から行います。');
+    });
+
+    window.addEventListener('storage', e => {
+      if(e.key !== ANNOTATION_STORAGE_KEY) return;
+      pageStrokes = loadAllAnnotations();
+      renderAnnotations();
+    });
 
     applyZoom(1);
+    renderAnnotations();
   </script>
 </body>
 </html>

@@ -156,3 +156,43 @@
   .btn-draft, .btn-complete { height: 40px; font-size: 15px; }
   .process-toast { font-size: 15px; }
 }
+
+
+/* ===== 図面手書き入力 ===== */
+.annotation-action{
+  min-width:auto!important;
+  padding:0 10px!important;
+}
+.annotation-save-status{
+  margin-left:2px;
+  padding:3px 8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  color:#e7e3dc;
+  font-size:14px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.annotation-save-status.unsaved{
+  color:#ffd9a8;
+  background:rgba(238,122,0,.16);
+}
+#annotationCanvas{
+  z-index:2;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-touch-callout:none;
+}
+#annotationCanvas.drawing-enabled{
+  touch-action:none;
+}
+.drawing-svg{z-index:1;pointer-events:none}
+
+@media (min-width:1000px) and (max-width:1366px){
+  .annotation-action{padding:0 8px!important;font-size:14px!important}
+  .annotation-save-status{font-size:12px;padding:2px 6px}
+}
+
+/* 消しゴムボタン：文字記号ではなく消しゴム形状のSVGアイコンを表示 */
+.pen-btn .eraser-icon{width:24px;height:24px;display:block;color:currentColor;pointer-events:none}
+@media (min-width:1000px) and (max-width:1366px){.pen-btn .eraser-icon{width:20px;height:20px}}
