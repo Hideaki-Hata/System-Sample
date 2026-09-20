@@ -87,9 +87,9 @@
   transform:scale(var(--drawing-zoom));
   transform-origin:top center;
 }
-.drawing-svg,.drawing-canvas canvas{position:absolute;inset:0;width:100%;height:100%;display:block}.drawing-canvas canvas{touch-action:none;cursor:default}
+.drawing-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .drawing-footer{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:7px 12px;border-top:1px solid var(--line);background:var(--process-paper)}
-.pen-legend{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:21px}.pen-legend span{white-space:nowrap}.legend-swatch{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px}.legend-swatch.red{background:#c81e2b}.legend-swatch.blue{background:#1c5aa8}.legend-swatch.black{background:#232120}
+
 .drawing-thumbnails{display:flex;gap:5px}.thumb{display:inline-flex;flex-direction:row;align-items:center;justify-content:center;gap:5px;width:136px;min-width:136px;padding:4px 8px;border:1px solid #d5d0c7;border-radius:5px;background:#fff;color:#575852;font-size:21px;font-weight:700;white-space:nowrap}.thumb span{display:inline;font-size:21px;color:#8c8b84;white-space:nowrap}.thumb.active{border-color:var(--orange);background:#fff7ef;color:var(--orange-dark);box-shadow:inset 0 -2px 0 var(--orange)}
 
 .side-panel{min-width:0;min-height:0;display:flex;flex-direction:column}.side-panel-inner{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-right:2px}.side-section{background:#fff;border:1px solid #d8d4cb;border-radius:5px;box-shadow:0 1px 3px rgba(30,30,28,.05);overflow:hidden}.side-section summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:11px 12px;font-size:21px;font-weight:800;color:#30312d;user-select:none}.side-section summary::-webkit-details-marker{display:none}.side-section summary::after{content:"›";font-size:21px;color:var(--muted);transition:.15s}.side-section[open] summary{border-bottom:1px solid #e1ddd4}.side-section[open] summary::after{transform:rotate(90deg)}.side-section-body{padding:10px 12px 12px}
@@ -114,7 +114,7 @@
   .side-panel-inner{overflow-y:visible}.side-actions{margin-bottom:8px}.drawing-toolbar{gap:8px}.doc-name{max-width:280px}
 }
 @media(max-width:640px){
-  .page-context{padding:9px 12px}.case-meta-sub{gap:12px}.process-main{padding:8px}.doc-name{display:none}.drawing-canvas-wrap{padding:8px}.pen-legend{display:none}.field-grid{grid-template-columns:1fr}.timer-row{grid-template-columns:1fr 1fr}.timer-row strong{grid-column:1/-1;text-align:left}
+  .page-context{padding:9px 12px}.case-meta-sub{gap:12px}.process-main{padding:8px}.doc-name{display:none}.drawing-canvas-wrap{padding:8px}.field-grid{grid-template-columns:1fr}.timer-row{grid-template-columns:1fr 1fr}.timer-row strong{grid-column:1/-1;text-align:left}
 }
 
 /* ===== iPad / タブレット横向き最適化 ===== */
@@ -133,7 +133,7 @@
   .tool-btn.square, .pen-btn { min-width: 38px; padding: 0 7px; }
   .drawing-canvas-wrap { padding: 10px; }
   .drawing-footer { padding: 6px 8px; gap: 8px; }
-  .pen-legend { gap: 8px; font-size: 14px; }
+  
   .drawing-thumbnails { gap: 4px; }
   .thumb { width: 118px; min-width: 118px; padding: 4px 6px; font-size: 15px; gap: 4px; }
   .thumb span { font-size: 14px; }
@@ -194,5 +194,15 @@
 }
 
 /* 消しゴムボタン：文字記号ではなく消しゴム形状のSVGアイコンを表示 */
+
+
+/* ===== 図面追記ツール：モック表示のみ ===== */
+.mock-only-tools{flex:0 1 auto;gap:6px}
+.pen-btn{cursor:pointer}
 .pen-btn .eraser-icon{width:24px;height:24px;display:block;color:currentColor;pointer-events:none}
-@media (min-width:1000px) and (max-width:1366px){.pen-btn .eraser-icon{width:20px;height:20px}}
+.annotation-action{min-width:auto!important;padding:0 10px!important}
+@media (min-width:1000px) and (max-width:1366px){
+  .mock-only-tools{gap:4px}
+  .pen-btn .eraser-icon{width:20px;height:20px}
+  .annotation-action{padding:0 8px!important;font-size:14px!important}
+}

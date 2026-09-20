@@ -63,19 +63,17 @@
 <button aria-label="次のページ" class="tool-btn square" id="nextPage" type="button">›</button>
 <span class="doc-name" id="docName">図面 DEMO-DWG-0001　デモ部品A 本体図.pdf</span>
 </div>
-<div aria-label="図面追記ツール" class="tool-group pen-tools">
-<button class="pen-btn active" data-tool="cursor" title="選択・移動" type="button">↖</button>
-<button class="pen-btn" data-tool="pen" title="ペン" type="button">✎</button>
-<button class="pen-btn" data-tool="marker" title="マーカー" type="button">▰</button>
-<button aria-label="消しゴム" class="pen-btn" data-tool="eraser" title="消しゴム" type="button"><svg aria-hidden="true" class="eraser-icon" viewBox="0 0 24 24"><path d="M15.8 3.4 21 8.6a2 2 0 0 1 0 2.8l-7.8 7.8a2 2 0 0 1-1.4.6H7.2a2 2 0 0 1-1.4-.6l-2.8-2.8a2 2 0 0 1 0-2.8l10-10.2a2 2 0 0 1 2.8 0Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/><path d="m8.1 9 6.9 6.9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11.8 19.8h8.7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg></button>
+<div aria-label="図面追記ツール（モック表示）" class="tool-group pen-tools mock-only-tools">
+<button aria-label="ペン（モック）" class="pen-btn active" data-mock-tool="pen" title="ペン（モック表示）" type="button">✎</button>
+<button aria-label="マーカー（モック）" class="pen-btn" data-mock-tool="marker" title="マーカー（モック表示）" type="button">▰</button>
+<button aria-label="消しゴム（モック）" class="pen-btn" data-mock-tool="eraser" title="消しゴム（モック表示）" type="button"><svg aria-hidden="true" class="eraser-icon" viewBox="0 0 24 24"><path d="M15.8 3.4 21 8.6a2 2 0 0 1 0 2.8l-7.8 7.8a2 2 0 0 1-1.4.6H7.2a2 2 0 0 1-1.4-.6l-2.8-2.8a2 2 0 0 1 0-2.8l10-10.2a2 2 0 0 1 2.8 0Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/><path d="m8.1 9 6.9 6.9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11.8 19.8h8.7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg></button>
 <span class="tool-sep"></span>
-<button class="color-btn red active" data-color="#c81e2b" title="赤：要確認・実測値" type="button"></button>
-<button class="color-btn blue" data-color="#1c5aa8" title="青：指示の補足" type="button"></button>
-<button class="color-btn black" data-color="#232120" title="黒：確認サイン" type="button"></button>
+<button aria-label="赤色（モック）" class="color-btn red active" data-mock-color="red" title="赤（モック表示）" type="button"></button>
+<button aria-label="青色（モック）" class="color-btn blue" data-mock-color="blue" title="青（モック表示）" type="button"></button>
+<button aria-label="黒色（モック）" class="color-btn black" data-mock-color="black" title="黒（モック表示）" type="button"></button>
 <span class="tool-sep"></span>
-<button class="tool-btn annotation-action" id="undoAnnotation" title="直前の書込みを元に戻す" type="button">↶ 戻す</button>
-<button class="tool-btn annotation-action" id="clearAnnotation" title="このページの書込みをすべて消去" type="button">全消去</button>
-<span class="annotation-save-status" id="annotationSaveStatus">端末内に自動保存</span>
+<button class="tool-btn annotation-action" id="mockUndo" title="戻す（モック表示）" type="button">↶ 戻す</button>
+<button class="tool-btn annotation-action" id="mockClear" title="全消去（モック表示）" type="button">全消去</button>
 </div>
 <div class="tool-group view-tools">
 <button aria-label="縮小" class="tool-btn square" id="zoomOut" type="button">−</button>
@@ -114,15 +112,6 @@
 <text fill="#232120" font-size="13" x="704" y="98">4-φ8 貫通</text>
 <text fill="#232120" font-size="12" text-anchor="middle" x="450" y="215">120×60</text>
 <text fill="#4a4642" font-size="13" text-anchor="middle" x="445" y="470">正面図（S=1:2）</text>
-<g class="sample-annotation">
-<circle cx="260" cy="140" fill="none" r="18" stroke="#c81e2b" stroke-width="2.4"></circle>
-<path d="M300 128q6 14 14 2" fill="none" stroke="#c81e2b" stroke-linecap="round" stroke-width="2.4"></path>
-<text fill="#c81e2b" font-size="12" font-weight="700" x="305" y="118">初品OK</text>
-<path d="M330 78q60 -10 110 2" fill="none" stroke="#c81e2b" stroke-linecap="round" stroke-width="2"></path>
-<text fill="#c81e2b" font-size="12" font-weight="700" x="345" y="60">実測 449.8　OK</text>
-<path d="M540 235q30 20 5 45" fill="none" stroke="#1c5aa8" stroke-linecap="round" stroke-width="2"></path>
-<text fill="#1c5aa8" font-size="11.5" font-weight="700" x="548" y="230">R2で面取り指示</text>
-</g>
 <g transform="translate(600,500)">
 <rect fill="#fff" height="150" stroke="#232120" stroke-width="1.4" width="376" x="0" y="0"></rect>
 <line stroke="#232120" x1="0" x2="376" y1="30" y2="30"></line><line stroke="#232120" x1="0" x2="376" y1="58" y2="58"></line><line stroke="#232120" x1="0" x2="376" y1="86" y2="86"></line><line stroke="#232120" x1="0" x2="376" y1="114" y2="114"></line>
@@ -136,15 +125,9 @@
 <text fill="#85806f" font-size="10" x="272" y="134">頁</text><text fill="#232120" font-size="11" x="272" y="146">2 / 3</text>
 </g>
 </svg>
-<canvas aria-label="図面への手書き追記" height="700" id="annotationCanvas" width="1000"></canvas>
 </div>
 </div>
 <div class="drawing-footer">
-<div class="pen-legend">
-<span><i class="legend-swatch red"></i>要確認・実測値</span>
-<span><i class="legend-swatch blue"></i>指示の補足</span>
-<span><i class="legend-swatch black"></i>確認サイン</span>
-</div>
 <div class="drawing-thumbnails" id="pageTabs">
 <button class="thumb" data-name="加工指示書 DEMO-DWG-0001.pdf" data-page="1" type="button">指示書<span>P.1</span></button>
 <button class="thumb active" data-name="図面 DEMO-DWG-0001　デモ部品A 本体図.pdf" data-page="2" type="button">図面<span>P.2</span></button>
@@ -185,7 +168,7 @@
 <label class="check-row"><input type="checkbox"/> バリ・面粗さ確認</label>
 <label class="check-row"><input type="checkbox"/> 穴位置・寸法サンプリング（5枚毎）</label>
 <label class="check-row"><input type="checkbox"/> 数量・員数確認</label>
-<p class="side-hint">実測値・○×・サインなどは、左の図面PDFへ直接ペン入力できます。</p>
+<p class="side-hint">実測値・確認結果は、右側のチェック項目・フィードバック欄へ入力します。</p>
 </div>
 </details>
 <details class="side-section">
@@ -224,95 +207,17 @@
 </main>
 <div aria-live="polite" class="toast process-toast" id="processToast" role="status"></div>
 <script>
-    const canvas = document.getElementById('annotationCanvas');
-    const ctx = canvas.getContext('2d');
     const drawingCanvas = document.getElementById('drawingCanvas');
     const zoomLabel = document.getElementById('zoomLabel');
     const toast = document.getElementById('processToast');
-    const saveStatus = document.getElementById('annotationSaveStatus');
-
-    const ANNOTATION_STORAGE_KEY = 'laserFactoryDemoAnnotationsV1';
-    let tool = 'cursor';
-    let penColor = '#c81e2b';
-    let drawing = false;
     let zoom = 1;
-    let activePointerId = null;
-    let currentStroke = null;
     let currentPage = '2';
-    let pageStrokes = loadAllAnnotations();
 
     function notify(message){
       toast.textContent = message;
       toast.classList.add('show');
       clearTimeout(notify.timer);
       notify.timer = setTimeout(() => toast.classList.remove('show'), 2200);
-    }
-
-    function setSaveStatus(text, saved=true){
-      if(!saveStatus) return;
-      saveStatus.textContent = text;
-      saveStatus.classList.toggle('unsaved', !saved);
-      clearTimeout(setSaveStatus.timer);
-      if(saved){
-        setSaveStatus.timer = setTimeout(() => {
-          saveStatus.textContent = '端末内に自動保存';
-        }, 1500);
-      }
-    }
-
-    function loadAllAnnotations(){
-      try{
-        const raw = localStorage.getItem(ANNOTATION_STORAGE_KEY);
-        const parsed = raw ? JSON.parse(raw) : {};
-        return parsed && typeof parsed === 'object' ? parsed : {};
-      }catch(err){
-        console.warn('Annotation load failed', err);
-        return {};
-      }
-    }
-
-    function saveAllAnnotations(showNotice=false){
-      try{
-        localStorage.setItem(ANNOTATION_STORAGE_KEY, JSON.stringify(pageStrokes));
-        setSaveStatus('保存済み', true);
-        if(showNotice) notify('図面への書込みをこの端末に保存しました。');
-      }catch(err){
-        console.warn('Annotation save failed', err);
-        setSaveStatus('保存できませんでした', false);
-        if(showNotice) notify('端末内への保存に失敗しました。');
-      }
-    }
-
-    function strokesForPage(page=currentPage){
-      if(!Array.isArray(pageStrokes[page])) pageStrokes[page] = [];
-      return pageStrokes[page];
-    }
-
-    function renderAnnotations(){
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const strokes = strokesForPage();
-      for(const stroke of strokes) drawStroke(stroke);
-    }
-
-    function drawStroke(stroke){
-      const pts = stroke.points || [];
-      if(!pts.length) return;
-      ctx.save();
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.globalCompositeOperation = stroke.tool === 'eraser' ? 'destination-out' : 'source-over';
-      ctx.strokeStyle = stroke.color || '#c81e2b';
-      ctx.globalAlpha = stroke.tool === 'marker' ? 0.32 : 1;
-      ctx.lineWidth = stroke.width || (stroke.tool === 'marker' ? 20 : stroke.tool === 'eraser' ? 28 : 1.8);
-      ctx.beginPath();
-      ctx.moveTo(pts[0].x, pts[0].y);
-      if(pts.length === 1){
-        ctx.lineTo(pts[0].x + 0.01, pts[0].y + 0.01);
-      }else{
-        for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x, pts[i].y);
-      }
-      ctx.stroke();
-      ctx.restore();
     }
 
     document.querySelectorAll('.crumb-link[data-href]').forEach(btn => btn.addEventListener('click', () => { location.href = btn.dataset.href; }));
@@ -334,117 +239,13 @@
       e.currentTarget.textContent = full ? '⤢ 通常表示に戻る' : '⛶ 全画面表示';
     });
 
-    document.querySelectorAll('.pen-btn').forEach(btn => btn.addEventListener('click', () => {
-      document.querySelectorAll('.pen-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      tool = btn.dataset.tool;
-      canvas.classList.toggle('drawing-enabled', tool !== 'cursor');
-      canvas.style.cursor = tool === 'cursor' ? 'default' : tool === 'eraser' ? 'cell' : 'crosshair';
-      notify(tool === 'cursor' ? '図面の移動・閲覧モードです。' : tool === 'eraser' ? '消しゴムを選択しました。' : tool === 'marker' ? 'マーカーを選択しました。' : 'ペンを選択しました。');
-    }));
-
-    document.querySelectorAll('.color-btn').forEach(btn => btn.addEventListener('click', () => {
-      document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      penColor = btn.dataset.color;
-    }));
-
-    function canvasPoint(e){
-      const r = canvas.getBoundingClientRect();
-      return {
-        x:(e.clientX-r.left)*(canvas.width/r.width),
-        y:(e.clientY-r.top)*(canvas.height/r.height)
-      };
-    }
-
-    function strokeWidthFor(e){
-      if(tool === 'eraser') return 30;
-      if(tool === 'marker') return 20;
-      // Apple Pencil等で筆圧が取得できる場合だけ、わずかに線幅へ反映
-      if(e.pointerType === 'pen' && e.pressure > 0){
-        return 1.2 + e.pressure * 1.4;
-      }
-      return 1.8;
-    }
-
-    function beginStroke(e){
-      if(tool === 'cursor' || (e.pointerType === 'mouse' && e.button !== 0)) return;
-      e.preventDefault();
-      drawing = true;
-      activePointerId = e.pointerId;
-      try{ canvas.setPointerCapture(e.pointerId); }catch(_){ }
-      currentStroke = {
-        tool,
-        color: penColor,
-        width: strokeWidthFor(e),
-        points: [canvasPoint(e)]
-      };
-      setSaveStatus('書込み中…', false);
-      renderAnnotations();
-      drawStroke(currentStroke);
-    }
-
-    function continueStroke(e){
-      if(!drawing || e.pointerId !== activePointerId || !currentStroke) return;
-      e.preventDefault();
-      currentStroke.points.push(canvasPoint(e));
-      renderAnnotations();
-      drawStroke(currentStroke);
-    }
-
-    function finishStroke(e){
-      if(!drawing || (e && e.pointerId !== activePointerId)) return;
-      if(e) e.preventDefault();
-      drawing = false;
-      if(currentStroke && currentStroke.points.length){
-        strokesForPage().push(currentStroke);
-        currentStroke = null;
-        saveAllAnnotations(false);
-      }
-      activePointerId = null;
-      renderAnnotations();
-    }
-
-    canvas.addEventListener('pointerdown', beginStroke, {passive:false});
-    canvas.addEventListener('pointermove', continueStroke, {passive:false});
-    canvas.addEventListener('pointerup', finishStroke, {passive:false});
-    canvas.addEventListener('pointercancel', finishStroke, {passive:false});
-    canvas.addEventListener('contextmenu', e => { if(tool !== 'cursor') e.preventDefault(); });
-
-    document.getElementById('undoAnnotation').addEventListener('click', () => {
-      const strokes = strokesForPage();
-      if(!strokes.length){
-        notify('このページに戻せる書込みはありません。');
-        return;
-      }
-      strokes.pop();
-      renderAnnotations();
-      saveAllAnnotations(false);
-      notify('直前の書込みを元に戻しました。');
-    });
-
-    document.getElementById('clearAnnotation').addEventListener('click', () => {
-      const strokes = strokesForPage();
-      if(!strokes.length){
-        notify('このページに書込みはありません。');
-        return;
-      }
-      if(!confirm(`P.${currentPage} の手書き内容をすべて消去しますか？`)) return;
-      pageStrokes[currentPage] = [];
-      renderAnnotations();
-      saveAllAnnotations(false);
-      notify(`P.${currentPage} の書込みを消去しました。`);
-    });
-
     const pageButtons = [...document.querySelectorAll('.thumb')];
     function selectPage(btn){
-      if(drawing) finishStroke({pointerId: activePointerId, preventDefault() {}});
       pageButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentPage = btn.dataset.page;
       document.getElementById('pageNow').textContent = currentPage;
       document.getElementById('docName').textContent = btn.dataset.name;
-      renderAnnotations();
       notify(currentPage === '1' ? '加工指示書を表示しました。' : currentPage === '4' ? '原価情報 P.4 を表示しました。' : `図面 P.${currentPage} を表示しました。`);
     }
     pageButtons.forEach(btn => btn.addEventListener('click', () => selectPage(btn)));
@@ -457,23 +258,27 @@
       selectPage(pageButtons[Math.min(pageButtons.length-1, i+1)]);
     });
 
-    document.getElementById('machineSend').addEventListener('click', () => notify('加工機へ入力情報を送信しました。'));
-    document.getElementById('draftSave').addEventListener('click', () => {
-      saveAllAnnotations(true);
-    });
-    document.getElementById('completeWork').addEventListener('click', () => {
-      saveAllAnnotations(false);
-      notify('図面追記・チェック・申し送り内容を保存しました。工程の終了は作業入力から行います。');
-    });
+    // 図面追記ツールはモック表示のみ。実際の描画は行いません。
+    document.querySelectorAll('[data-mock-tool]').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-mock-tool]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      notify('モック表示です。図面への書込み機能は実装していません。');
+    }));
+    document.querySelectorAll('[data-mock-color]').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-mock-color]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      notify('モック表示です。色選択のみ表示しています。');
+    }));
+    document.getElementById('mockUndo').addEventListener('click', () => notify('モック表示です。書込みデータはありません。'));
+    document.getElementById('mockClear').addEventListener('click', () => notify('モック表示です。書込みデータはありません。'));
 
-    window.addEventListener('storage', e => {
-      if(e.key !== ANNOTATION_STORAGE_KEY) return;
-      pageStrokes = loadAllAnnotations();
-      renderAnnotations();
+    document.getElementById('machineSend').addEventListener('click', () => notify('加工機へ入力情報を送信しました。'));
+    document.getElementById('draftSave').addEventListener('click', () => notify('入力内容を下書き保存しました。'));
+    document.getElementById('completeWork').addEventListener('click', () => {
+      notify('チェック・申し送り内容を保存しました。工程の終了は作業入力から行います。');
     });
 
     applyZoom(1);
-    renderAnnotations();
   </script>
 </body>
 </html>
